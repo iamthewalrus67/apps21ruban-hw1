@@ -60,6 +60,10 @@ public class TemperatureSeriesAnalysis {
             throw new IllegalArgumentException();
         }
 
+        if (temperatureSeriesSize == 1) {
+            return 0;
+        }
+
         double mean = average();
         double sum = 0;
 
@@ -167,11 +171,15 @@ public class TemperatureSeriesAnalysis {
             temperatureSeriesSize++;
         }
 
-        temperatureSeriesSize += temps.length;
         return temperatureSeriesSize;
     }
 
     private void expandArray() {
+        if (temperatureSeriesCapacity == 0) {
+            temperatureSeries = new double[1];
+            temperatureSeriesCapacity = 1;
+            return;
+        }
         double[] newTempSeries = new double[temperatureSeriesCapacity*2];
         temperatureSeriesCapacity *= 2;
         System.arraycopy(temperatureSeries, 0, newTempSeries, 0, temperatureSeriesSize);
