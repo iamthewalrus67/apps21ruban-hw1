@@ -64,7 +64,7 @@ public class TemperatureSeriesAnalysis {
         double sum = 0;
 
         for (int i = 0; i < temperatureSeriesSize; i++) {
-            sum += temperatureSeries[i];
+            sum += Math.pow(temperatureSeries[i]-mean, 2);
         }
 
         return Math.sqrt(sum/(temperatureSeries.length-1));
