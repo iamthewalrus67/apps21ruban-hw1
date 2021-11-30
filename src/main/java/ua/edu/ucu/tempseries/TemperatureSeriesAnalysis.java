@@ -27,7 +27,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double[] getTemperatureSeries() {
-        return temperatureSeries;
+        return Arrays.copyOf(temperatureSeries, temperatureSeriesSize);
     }
 
     public void setTemperatureSeries(double[] temperatureSeries) {
