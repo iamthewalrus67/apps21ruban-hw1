@@ -172,4 +172,27 @@ public class TemperatureSeriesAnalysisTest {
     public void testAddTempsException() {
         emptyTemperatureSeriesAnalysis.addTemps(2, 3, 4, 5, -274, 0);
     }
+
+    @Test
+    public void testGetTemperatureSeries() {
+        setUp();
+        double[] tempSeriesArray = tempSeriesAnalysis.getTemperatureSeries();
+        tempSeriesArray[0] = 10;
+        assertArrayEquals(new double[]{5, 1, 3, 6, 2, -1, -2, -5}, tempSeriesAnalysis.getTemperatureSeries(), 0.00001);
+    }
+
+    @Test
+    public void testSetTemperatureSeries() {
+        setUp();
+        double[] tempSeriesArray = new double[] {1, 2, 3, 4, 5};
+        tempSeriesAnalysis.setTemperatureSeries(tempSeriesArray);
+        assertArrayEquals(new double[] {1, 2, 3, 4, 5}, tempSeriesAnalysis.getTemperatureSeries(), 0.00001);
+    }
+
+    @Test(expected = InputMismatchException.class)
+    public void testSetTemperatureSeriesException() {
+        setUp();
+        double[] tempSeriesArray = new double[] {1, 2, -274, 4, 5};
+        tempSeriesAnalysis.setTemperatureSeries(tempSeriesArray);
+    }
 }
